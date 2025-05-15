@@ -12,101 +12,112 @@
     }
 
     body {
-      margin: 0;
-      padding: 0;
-      background-color: #0E0E0E;
-      color: #FFFFFF;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      overflow: hidden;
-    }
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(180deg, #00A2FF 0%, #004A8F 100%);
+  color: #FFFFFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-    #connectWallet {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: #5CDB95;
-      color: #0E0E0E;
-      padding: 0.6rem 1.2rem;
-      border-radius: 12px;
-      border: none;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.3s ease;
-      z-index: 100;
-    }
+#connectWallet {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #00A2FF;
+  color: #FFFFFF;
+  padding: 0.6rem 1.2rem;
+  border-radius: 20px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  box-shadow: 0 0 10px #00A2FF;
+  z-index: 100;
+}
 
-    #connectWallet:hover {
-      background: #45A29E;
-    }
+#connectWallet:hover {
+  background: #007ACC;
+  box-shadow: 0 0 20px #007ACC;
+}
 
-    .card {
-      background: #1F2833;
-      padding: 2rem;
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgba(92, 219, 149, 0.2);
-      width: 90%;
-      max-width: 400px;
-      text-align: center;
-      transform: scale(0.95);
-      transition: transform 0.3s ease;
-    }
+.card {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 2rem;
+  border-radius: 24px;
+  box-shadow: 0 0 40px rgba(0, 162, 255, 0.7);
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  border: 1.5px solid #00A2FF;
+  transition: transform 0.3s ease;
+}
 
-    .card:hover {
-      transform: scale(1);
-    }
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 60px #00B0FF;
+}
 
-    h1 {
-      color: #66FCF1;
-      margin-bottom: 1rem;
-      font-size: 1.8rem;
-    }
+h1 {
+  color: #00D0FF;
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  text-shadow: 0 0 10px #00D0FF;
+}
 
-    #mintNFT {
-      margin-top: 20px;
-      background: #5CDB95;
-      color: #0E0E0E;
-      border: none;
-      padding: 0.75rem 1.5rem;
-      font-size: 1.1rem;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
+#mintNFT {
+  margin-top: 20px;
+  background: #00A2FF;
+  color: #FFFFFF;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.1rem;
+  border-radius: 24px;
+  cursor: pointer;
+  box-shadow: 0 0 15px #00A2FF;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
 
-    #mintNFT:hover {
-      background: #45A29E;
-    }
+#mintNFT:hover {
+  background: #007ACC;
+  box-shadow: 0 0 25px #007ACC;
+}
 
-    #walletAddress {
-      margin-top: 1rem;
-      font-weight: 500;
-      color: #66FCF1;
-    }
+#walletAddress {
+  margin-top: 1rem;
+  font-weight: 600;
+  color: #B3E5FF;
+  text-shadow: 0 0 8px #00A2FF;
+}
 
-    #loadingOverlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.7);
-      justify-content: center;
-      align-items: center;
-      color: #fff;
-      font-size: 1.5rem;
-      z-index: 999;
-    }
+#loadingOverlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center;
+  color: #00A2FF;
+  font-size: 1.5rem;
+  z-index: 999;
+  text-shadow: 0 0 10px #00A2FF;
+}
 
-    #successMessage {
-      display: none;
-      font-size: 1.2rem;
-      color: #5CDB95;
-      margin-top: 15px;
-    }
+#successMessage {
+  display: none;
+  font-size: 1.2rem;
+  color: #00E5FF;
+  margin-top: 15px;
+  text-shadow: 0 0 12px #00E5FF;
+}
   </style>
 </head>
 <body>
