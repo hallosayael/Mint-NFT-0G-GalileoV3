@@ -14,16 +14,14 @@
     body {
       margin: 0;
       padding: 0;
-      background-color: #121212;
-      color: #fff;
+      background-color: #0A0A0A;
+      color: #FFFFFF;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      overflow: hidden;
     }
 
-    /* Wallet button - top right */
     #connectWallet {
       position: fixed;
       top: 20px;
@@ -36,7 +34,6 @@
       font-weight: bold;
       cursor: pointer;
       transition: background 0.3s ease;
-      z-index: 100;
     }
 
     #connectWallet:hover {
@@ -44,25 +41,19 @@
     }
 
     .card {
-      background: #1e1e1e;
+      background: #1E1E1E;
       padding: 2rem;
       border-radius: 20px;
       box-shadow: 0 0 20px rgba(0, 255, 194, 0.2);
-      width: 90%;
-      max-width: 400px;
+      width: 100%;
+      max-width: 420px;
       text-align: center;
-      transform: scale(0.95);
-      transition: transform 0.3s ease;
-    }
-
-    .card:hover {
-      transform: scale(1);
     }
 
     h1 {
       color: #00FFC2;
       margin-bottom: 1rem;
-      font-size: 1.8rem;
+      font-size: 2rem;
     }
 
     #mintNFT {
@@ -124,7 +115,7 @@
 
   <script>
     const contractAddress = "0x7FaE37Cb326D914a089f180aDf288933f9FF0d41";
-    const contractABI = [
+    const abi = [
 	{
 		"inputs": [],
 		"stateMutability": "nonpayable",
@@ -657,53 +648,36 @@
 		"type": "function"
 	}
 ];
-
     let provider, signer, contract;
-    const connectBtn = document.getElementById('connectWallet');
-    const mintBtn = document.getElementById('mintNFT');
-    const walletAddressEl = document.getElementById('walletAddress');
-    const loadingOverlay = document.getElementById('loadingOverlay');
-    const successMessage = document.getElementById('successMessage');
 
-    connectBtn.onclick = async () => {
+    async function connectWallet() {
       if (window.ethereum) {
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
         provider = new ethers.providers.Web3Provider(window.ethereum);
-        await provider.send("eth_requestAccounts", []);
         signer = provider.getSigner();
-        contract = new ethers.Contract(contractAddress, contractABI, signer);
-
+        contract = new ethers.Contract(contractAddress, abi, signer);
         const address = await signer.getAddress();
-        const shortAddress = `${address.slice(0, 6)}...${address.slice(-4)}`;
-        connectBtn.textContent = shortAddress;
-        walletAddressEl.textContent = `Connected: ${shortAddress}`;
+        document.getElementById('walletAddress').innerText = address;
       } else {
-        alert("Please install MetaMask!");
+        alert('Metamask not detected!');
       }
-    };
+    }
 
-    mintBtn.onclick = async () => {
-      if (!contract) return alert("Please connect wallet first!");
-
+    async function mintNFT() {
       try {
-        loadingOverlay.style.display = 'flex';
-
-        const recipient = await signer.getAddress();
-        const tokenURI = "https://ipfs.io/ipfs/QmUDu4VuLJ5qCkQLKjv3WZSkpTb3ZxD8N5wVZpHHz6cY9R";
-        const tx = await contract.mintNFT(recipient, tokenURI);
+        document.getElementById('loadingOverlay').style.display = 'flex';
+        const tx = await contract.mint();
         await tx.wait();
-
-        loadingOverlay.style.display = 'none';
-        successMessage.style.display = 'block';
-
-        setTimeout(() => {
-          successMessage.style.display = 'none';
-        }, 5000);
-      } catch (err) {
-        console.error(err);
-        loadingOverlay.style.display = 'none';
-        alert("Error minting NFT. Check console for details.");
+        document.getElementById('loadingOverlay').style.display = 'none';
+        document.getElementById('successMessage').style.display = 'block';
+      } catch (error) {
+        document.getElementById('loadingOverlay').style.display = 'none';
+        alert('Minting failed: ' + error.message);
       }
-    };
+    }
+
+    document.getElementById('connectWallet').onclick = connectWallet;
+    document.getElementById('mintNFT').onclick = mintNFT;
   </script>
 </body>
 </html>
