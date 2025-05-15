@@ -666,7 +666,7 @@
     async function mintNFT() {
       try {
         document.getElementById('loadingOverlay').style.display = 'flex';
-        const tx = await contract.mint();
+        const tx = await contract.mintNFT(recipient);
         await tx.wait();
         document.getElementById('loadingOverlay').style.display = 'none';
         document.getElementById('successMessage').style.display = 'block';
